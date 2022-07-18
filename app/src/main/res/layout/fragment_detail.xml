@@ -66,24 +66,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/appointmentText"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="16sp"
                 android:textColor="@color/tab_color"
                 android:layout_marginStart="10dp"
                 android:textStyle="bold"
-                android:text="Randevu Al"/>
-            <TextView
+                android:text="@string/get_data"/>
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:textColor="@color/tab_color"
-                android:textSize="20sp"
-                android:text=">"
-                android:textAlignment="viewEnd"/>
+                android:background="@drawable/ic_arrow"/>
+
         </LinearLayout>
 
     </LinearLayout>

@@ -31,7 +31,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/tab_color"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                tools:ignore="ContentDescription" />
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -39,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Dr. Salih Kınalı"
+            tools:text="Dr. Salih Kınalı"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -57,24 +58,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables,UselessParent">
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/paymentText"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="16sp"
                 android:textColor="@color/tab_color"
                 android:layout_marginStart="10dp"
                 android:textStyle="bold"
-                android:text="Premium Paket Al"/>
-            <TextView
+                android:text="@string/premium_package"/>
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:textColor="@color/tab_color"
-                android:textSize="20sp"
-                android:text=">"
-                android:textAlignment="viewEnd"/>
+                android:background="@drawable/ic_arrow"
+                tools:ignore="ContentDescription" />
         </LinearLayout>
 
     </LinearLayout>

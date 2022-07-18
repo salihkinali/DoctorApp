@@ -26,6 +26,9 @@
         <argument
             android:name="doctor"
             app:argType="com.salihkinali.doctorsapp.model.Doctor" />
+        <action
+            android:id="@+id/premiumFragment_to_meetingFragment"
+            app:destination="@id/meetingFragment" />
     </fragment>
     <fragment
         android:id="@+id/ordinaryDetailFragment"
@@ -35,6 +38,19 @@
         <argument
             android:name="doctor"
             app:argType="com.salihkinali.doctorsapp.model.Doctor" />
+        <action
+            android:id="@+id/action_ordinaryDetailFragment_to_paymentFragment2"
+            app:destination="@id/paymentFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.salihkinali.doctorsapp.fragment.PaymentFragment"
+        android:label="fragment_payment"
+        tools:layout="@layout/fragment_payment" />
+    <fragment
+        android:id="@+id/meetingFragment"
+        android:name="com.salihkinali.doctorsapp.fragment.MeetingFragment"
+        android:label="fragment_meeting"
+        tools:layout="@layout/fragment_meeting" />
 
 </navigation>

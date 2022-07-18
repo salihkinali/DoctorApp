@@ -9,7 +9,9 @@
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/DoctorsApp/app/src/main/res/layout/cardview_design.xml" value="0.23854166666666668" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/DoctorsApp/app/src/main/res/layout/fragment_base.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/DoctorsApp/app/src/main/res/layout/fragment_detail.xml" value="0.264" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/DoctorsApp/app/src/main/res/layout/fragment_meeting.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/DoctorsApp/app/src/main/res/layout/fragment_ordinary_detail.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/DoctorsApp/app/src/main/res/layout/fragment_payment.xml" value="0.23229166666666667" />
       </map>
     </option>
   </component>

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.salihkinali.doctorsapp.R
@@ -21,7 +22,7 @@ class OrdinaryDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View{
+    ): View {
         _binding = FragmentOrdinaryDetailBinding.inflate(inflater, container, false)
 
         return binding.root
@@ -30,7 +31,13 @@ class OrdinaryDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       getDoctor()
+        getDoctor()
+        binding.paymentText.setOnClickListener {
+            val action =
+                OrdinaryDetailFragmentDirections.actionOrdinaryDetailFragmentToPaymentFragment2()
+            findNavController().navigate(action)
+        }
+
     }
 
     @SuppressLint("SetTextI18n")

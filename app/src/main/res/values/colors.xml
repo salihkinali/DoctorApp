@@ -10,5 +10,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="orange">#FEAC02</color>
     <color name="gray">#F4F4F4</color>
+    <color name="dark_gray">#6A6A77</color>
     <color name="view_color">#838080</color>
 </resources>

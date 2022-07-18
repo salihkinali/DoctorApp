@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.salihkinali.doctorsapp.databinding.CardviewDesignBinding
 import com.salihkinali.doctorsapp.model.Doctor
 
-class DoctorAdapter(val itemClick: (Doctor) -> Unit) :
+class DoctorAdapter(private val itemClick: (Doctor) -> Unit) :
     ListAdapter<Doctor, DoctorAdapter.ViewHolder>(DiffUtilCallBack) {
 
     class ViewHolder(val cardviewDesignBinding: CardviewDesignBinding) :
