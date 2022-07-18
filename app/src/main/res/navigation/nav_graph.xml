@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/baseFragment">
+
+    <fragment
+        android:id="@+id/baseFragment"
+        android:name="com.salihkinali.doctorsapp.fragment.BaseFragment"
+        android:label="fragment_base"
+        tools:layout="@layout/fragment_base" >
+        <action
+            android:id="@+id/baseFragment_to_ordinaryDetailFragment"
+            app:destination="@id/ordinaryDetailFragment" />
+        <action
+            android:id="@+id/baseFragment_to_premiumFragment"
+            app:destination="@id/premiumFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/premiumFragment"
+        android:name="com.salihkinali.doctorsapp.fragment.PremiumDetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+
+        <argument
+            android:name="doctor"
+            app:argType="com.salihkinali.doctorsapp.model.Doctor" />
+    </fragment>
+    <fragment
+        android:id="@+id/ordinaryDetailFragment"
+        android:name="com.salihkinali.doctorsapp.fragment.OrdinaryDetailFragment"
+        android:label="fragment_ordinary_detail"
+        tools:layout="@layout/fragment_ordinary_detail" >
+        <argument
+            android:name="doctor"
+            app:argType="com.salihkinali.doctorsapp.model.Doctor" />
+    </fragment>
+
+</navigation>
