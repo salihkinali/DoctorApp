@@ -14,7 +14,7 @@ import retrofit2.Response
 class BaseViewModel:ViewModel() {
     private val _doctorList = MutableLiveData<List<Doctor>>()
     val doctorList: LiveData<List<Doctor>> get() = _doctorList
-
+    private var currentList: List<Doctor>? = null
 
     init {
         getList()
@@ -31,6 +31,7 @@ class BaseViewModel:ViewModel() {
                 ) {
                     if(response.isSuccessful){
                         _doctorList.value = response.body()!!.doctors
+                        currentList = response.body()!!.doctors
                     }
                 }
 
@@ -40,5 +41,16 @@ class BaseViewModel:ViewModel() {
 
             })
         }
+    }
+
+    fun searchList(gender: String?) {
+         if (gender != null){
+             val tempList = _doctorList.value?.filter {
+                 it.gender == gender
+             }
+             _doctorList.value = tempList!!
+         }else{
+             _doctorList.value = currentList!!
+         }
     }
 }

@@ -15,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import com.salihkinali.doctorsapp.R
 import com.salihkinali.doctorsapp.adapter.DoctorAdapter
 import com.salihkinali.doctorsapp.databinding.FragmentBaseBinding
+import com.salihkinali.doctorsapp.model.Doctor
 import com.salihkinali.doctorsapp.model.DoctorsResponse
 import com.salihkinali.doctorsapp.network.ApiService
 import com.salihkinali.doctorsapp.network.DoctorApi
@@ -65,9 +66,11 @@ class BaseFragment : Fragment() {
             if (isChecked) {
                 checkboxFemale.isChecked = false
                 gender = "male"
+
             } else {
                 gender = null
             }
+            viewModel.searchList(gender)
         }
         checkboxFemale.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -76,7 +79,11 @@ class BaseFragment : Fragment() {
             } else {
                 gender = null
             }
+            viewModel.searchList(gender)
         }
+    }
+
+    private fun getSize() {
     }
 
     private fun getInit() {
