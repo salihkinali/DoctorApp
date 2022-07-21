@@ -43,14 +43,25 @@ class BaseViewModel:ViewModel() {
         }
     }
 
-    fun searchList(gender: String?) {
-         if (gender != null){
-             val tempList = _doctorList.value?.filter {
-                 it.gender == gender
-             }
-             _doctorList.value = tempList!!
-         }else{
-             _doctorList.value = currentList!!
-         }
+    fun searchList(query: String?,gender: String?) {
+        if(query.isNullOrEmpty() && gender.isNullOrEmpty()){
+            _doctorList.value = currentList!!
+        }else if(query.isNullOrEmpty()){
+            // Only making filter for gender
+            _doctorList.value = currentList?.filter {
+                it.gender == gender
+            }
+        }else if(gender.isNullOrEmpty()){
+            // Only making filter for query
+            _doctorList.value = currentList!!.filter {
+                it.fullName.lowercase().contains(query.lowercase(), ignoreCase = true)
+            }
+        }else{
+            _doctorList.value = currentList!!.filter {
+                it.fullName.lowercase().contains(query.trim(),ignoreCase = true) &&
+                        it.gender == gender
+            }
+        }
     }
+
 }

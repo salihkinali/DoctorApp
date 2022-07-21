@@ -17,12 +17,10 @@ class PremiumDetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
     private val args:PremiumDetailFragmentArgs by navArgs()
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View{
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
@@ -44,7 +42,6 @@ class PremiumDetailFragment : Fragment() {
             .load(getDoctor.image.url)
             .into(binding.premiumImage)
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

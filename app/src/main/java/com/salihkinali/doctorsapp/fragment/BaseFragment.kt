@@ -1,29 +1,20 @@
 package com.salihkinali.doctorsapp.fragment
 
 import android.os.Bundle
-import android.util.Log
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
+import android.widget.SearchView
+import android.widget.SearchView.*
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavGraph
-import androidx.navigation.NavGraphNavigator
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import com.salihkinali.doctorsapp.R
 import com.salihkinali.doctorsapp.adapter.DoctorAdapter
 import com.salihkinali.doctorsapp.databinding.FragmentBaseBinding
-import com.salihkinali.doctorsapp.model.Doctor
-import com.salihkinali.doctorsapp.model.DoctorsResponse
-import com.salihkinali.doctorsapp.network.ApiService
-import com.salihkinali.doctorsapp.network.DoctorApi
 import com.salihkinali.doctorsapp.viewmodel.BaseViewModel
-import retrofit2.Call
-import retrofit2.Response
-import java.util.Locale.filter
-import javax.security.auth.callback.Callback
 
 
 class BaseFragment : Fragment() {
@@ -42,6 +33,8 @@ class BaseFragment : Fragment() {
         }
     }
     private var gender: String? = null
+    private var textQuery: String? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,11 +59,10 @@ class BaseFragment : Fragment() {
             if (isChecked) {
                 checkboxFemale.isChecked = false
                 gender = "male"
-
             } else {
                 gender = null
             }
-            viewModel.searchList(gender)
+            viewModel.searchList(textQuery,gender)
         }
         checkboxFemale.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -79,11 +71,22 @@ class BaseFragment : Fragment() {
             } else {
                 gender = null
             }
-            viewModel.searchList(gender)
+            viewModel.searchList(textQuery,gender)
         }
-    }
+        binding.searchView.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
 
-    private fun getSize() {
+            override fun onTextChanged(query: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                textQuery = query.toString()
+             viewModel.searchList(textQuery,gender)
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+        })
+
     }
 
     private fun getInit() {
@@ -91,11 +94,8 @@ class BaseFragment : Fragment() {
     }
 
     private fun getList() {
-
         viewModel.doctorList.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
     }
-
-
 }

@@ -10,10 +10,12 @@
     android:background="@color/gray"
     tools:context=".fragment.BaseFragment">
 
-    <androidx.appcompat.widget.SearchView
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:drawableStart="@drawable/ic_searh"
         android:layout_margin="20dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/search_background"
