@@ -8,4 +8,7 @@
     <string name="premium_package">Premium Paket Al</string>
     <string name="date">Randevu Ekranı</string>
     <string name="get_data">Randevu Al</string>
+    <string name="not_found">Kullanıcı Bulunamadı.</string>
+    <string name="erkek">Erkek</string>
+    <string name="klinik">Klinik Ara</string>
 </resources>

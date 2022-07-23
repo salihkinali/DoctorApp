@@ -1,6 +1,5 @@
 package com.salihkinali.doctorsapp.network
 
-import com.google.gson.Gson
 import com.salihkinali.doctorsapp.model.DoctorsResponse
 import retrofit2.Call
 import retrofit2.Retrofit

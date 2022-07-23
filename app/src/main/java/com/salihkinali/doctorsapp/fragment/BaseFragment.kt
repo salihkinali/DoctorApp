@@ -1,15 +1,11 @@
 package com.salihkinali.doctorsapp.fragment
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
-import android.widget.SearchView.*
-import androidx.core.widget.addTextChangedListener
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.salihkinali.doctorsapp.adapter.DoctorAdapter
@@ -73,20 +69,16 @@ class BaseFragment : Fragment() {
             }
             viewModel.searchList(textQuery,gender)
         }
-        binding.searchView.addTextChangedListener(object: TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        binding.searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
             }
 
-            override fun onTextChanged(query: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                textQuery = query.toString()
-             viewModel.searchList(textQuery,gender)
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.searchList(newText,gender)
+                return true
             }
         })
-
     }
 
     private fun getInit() {
@@ -94,8 +86,17 @@ class BaseFragment : Fragment() {
     }
 
     private fun getList() {
-        viewModel.doctorList.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+        viewModel.doctorList.observe(viewLifecycleOwner) {doctorList ->
+            if(doctorList.isNullOrEmpty()){
+                binding.userNotFoundImage.visibility = View.VISIBLE
+                binding.userNotFoundText.visibility = View.VISIBLE
+                binding.recylerView.visibility = View.GONE
+            }else{
+                binding.userNotFoundImage.visibility = View.GONE
+                binding.userNotFoundText.visibility = View.GONE
+                binding.recylerView.visibility = View.VISIBLE
+                adapter.submitList(doctorList)
+            }
         }
     }
 }

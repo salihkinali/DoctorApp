@@ -9,8 +9,6 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.salihkinali.doctorsapp.R
-import com.salihkinali.doctorsapp.databinding.FragmentDetailBinding
 import com.salihkinali.doctorsapp.databinding.FragmentOrdinaryDetailBinding
 
 
@@ -24,10 +22,8 @@ class OrdinaryDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentOrdinaryDetailBinding.inflate(inflater, container, false)
-
         return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,7 +33,6 @@ class OrdinaryDetailFragment : Fragment() {
                 OrdinaryDetailFragmentDirections.actionOrdinaryDetailFragmentToPaymentFragment2()
             findNavController().navigate(action)
         }
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -53,5 +48,4 @@ class OrdinaryDetailFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

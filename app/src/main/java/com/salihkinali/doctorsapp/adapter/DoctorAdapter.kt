@@ -12,8 +12,8 @@ import com.salihkinali.doctorsapp.model.Doctor
 class DoctorAdapter(private val itemClick: (Doctor) -> Unit) :
     ListAdapter<Doctor, DoctorAdapter.ViewHolder>(DiffUtilCallBack) {
 
-    class ViewHolder(val cardviewDesignBinding: CardviewDesignBinding) :
-        RecyclerView.ViewHolder(cardviewDesignBinding.root)
+    class ViewHolder(val cardViewDesignBinding: CardviewDesignBinding) :
+        RecyclerView.ViewHolder(cardViewDesignBinding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val cardDesignRowBinding =
@@ -23,7 +23,7 @@ class DoctorAdapter(private val itemClick: (Doctor) -> Unit) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.cardviewDesignBinding.apply {
+        holder.cardViewDesignBinding.apply {
             doctorText.text = item.fullName
             Glide.with(cardView.context)
                 .load(item.image.url)
