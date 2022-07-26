@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.salihkinali.doctorsapp.adapter.DoctorAdapter
 import com.salihkinali.doctorsapp.databinding.FragmentBaseBinding
+import com.salihkinali.doctorsapp.util.NetworkResult
 import com.salihkinali.doctorsapp.viewmodel.BaseViewModel
 
 
@@ -58,7 +60,7 @@ class BaseFragment : Fragment() {
             } else {
                 gender = null
             }
-            viewModel.searchList(textQuery,gender)
+            viewModel.searchList(textQuery, gender)
         }
         checkboxFemale.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -67,15 +69,16 @@ class BaseFragment : Fragment() {
             } else {
                 gender = null
             }
-            viewModel.searchList(textQuery,gender)
+            viewModel.searchList(textQuery, gender)
         }
-        binding.searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.searchList(newText,gender)
+                textQuery = newText
+                viewModel.searchList(textQuery, gender)
                 return true
             }
         })
@@ -86,16 +89,40 @@ class BaseFragment : Fragment() {
     }
 
     private fun getList() {
-        viewModel.doctorList.observe(viewLifecycleOwner) {doctorList ->
-            if(doctorList.isNullOrEmpty()){
-                binding.userNotFoundImage.visibility = View.VISIBLE
-                binding.userNotFoundText.visibility = View.VISIBLE
-                binding.recylerView.visibility = View.GONE
-            }else{
-                binding.userNotFoundImage.visibility = View.GONE
-                binding.userNotFoundText.visibility = View.GONE
-                binding.recylerView.visibility = View.VISIBLE
-                adapter.submitList(doctorList)
+        viewModel.status.observe(viewLifecycleOwner) { networkResult ->
+
+            when (networkResult) {
+
+                is NetworkResult.Success -> {
+                    viewModel.doctorList.observe(viewLifecycleOwner) { doctorList ->
+                        if (doctorList.isNullOrEmpty()) {
+                            binding.userNotFoundImage.visibility = View.VISIBLE
+                            binding.userNotFoundText.visibility = View.VISIBLE
+                            binding.recylerView.visibility = View.GONE
+                        } else {
+                            binding.userNotFoundImage.visibility = View.GONE
+                            binding.userNotFoundText.visibility = View.GONE
+                            binding.recylerView.visibility = View.VISIBLE
+                            adapter.submitList(doctorList)
+                        }
+                    }
+                }
+                is NetworkResult.Error -> {
+                    Toast.makeText(
+                        requireContext(),
+                        networkResult.exception.toString(),
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+                is NetworkResult.Failure -> {
+                    Toast.makeText(
+                        requireContext(),
+                        networkResult.throwable.toString(),
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
             }
         }
     }
